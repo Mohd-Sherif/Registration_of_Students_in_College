@@ -57,3 +57,13 @@ int main()
     } while (mainchoice != 0);
     return 0;
 }
+
+void intro() {
+    cout << "             Registration of students in college             " << endl;
+    cout << "      1. Add student." << endl;
+    cout << "      2. Edit student." << endl;
+    cout << "      3. Show all students in system." << endl;
+    cout << "      0. Quit." << endl;
+    cout << "      Please choose one from above choices: ";
+    cin >> mainchoice;
+}
