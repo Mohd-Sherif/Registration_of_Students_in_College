@@ -175,3 +175,27 @@ void add() {
         }
     } while (flag == true);
 }
+
+void submit(int subjectchoice,int studentindex,int subjectorder) {
+    switch (subjectchoice) {
+    case 1:
+        student[studentindex].money -= 1000;
+        student[studentindex].subject[subjectorder] = "Programming languages";
+        break;
+    case 2:
+        student[studentindex].money -= 400;
+        student[studentindex].subject[subjectorder] = "Technical writing";
+        break;
+    case 3:
+        student[studentindex].money -= 1000;
+        student[studentindex].subject[subjectorder] = "Software Engineering";
+        break;
+    case 4:
+        student[studentindex].money -= 600;
+        student[studentindex].subject[subjectorder] = "Database";
+        break;
+    default:
+        cout << "Invalid choice. Please try again." << endl;
+        flag = true;
+    }
+}
