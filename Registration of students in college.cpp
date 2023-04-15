@@ -344,3 +344,15 @@ void edit() {
         }
     } while (flag == true);
 }
+
+void summary() {
+    cout << "             Students registered in application.             " << endl;
+    cout << "Summary of students registered in system:\n" << endl;
+    for (int i = 0; i < x; i++) {
+        cout << student[i].id << ") Name is " << student[i].name << " and subjects enrolled in are (";
+        for (int j = 0; j < 2; j++) {
+            cout << student[i].subject[j] << ", ";
+        }
+        cout << student[i].subject[2] << ")." << endl;
+    }
+}
