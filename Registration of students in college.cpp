@@ -199,3 +199,148 @@ void submit(int subjectchoice,int studentindex,int subjectorder) {
         flag = true;
     }
 }
+
+void edit() {
+    int subjectchoice, firstchoice, secondchoice, edit;
+    char editchoice;
+    cout << "             Edit a student.             " << endl;
+    do {
+        flag = false;
+        cout << "Please enter id for a student to edit: ";
+        cin >> edit;
+        for (int i = 0; i < x; i++) {
+            if (student[i].id == edit) {
+                edit = i;
+                flag = false;
+                break;
+            }
+            flag = true;
+        }
+        if (flag == true) {
+            cout << "Error! There isn't a student with this id." << endl;
+        }
+    } while (flag == true);
+    cout << "Please Enter your student new name: ";
+    cin >> student[edit].name;
+    do {
+        flag = false;
+        cout << "Please Enter your student new available money: ";
+        cin >> student[edit].money;
+        if (student[edit].money < 2000) {
+            cout << "Error! The available money is less than the total fees of subjects." << endl;
+            flag = true;
+        }
+    } while (flag == true);
+    cout << "The chosen subjects are: ";
+    for (int i = 0; i < 2; i++) {
+        cout << student[edit].subject[i] << ", ";
+    }
+    cout << student[edit].subject[2] << "." << endl;
+    do {
+        flag = false;
+        cout << "Do you want to edit them Y/N: ";
+        cin >> editchoice;
+        switch (editchoice) {
+        case 'Y':
+            cout << "The available subjects:\n" << endl;
+            cout << "1) Programming languages.\tFee 1000" << endl;
+            cout << "2) Technical writing.    \tFee 400" << endl;
+            cout << "3) Software Engineering. \tFee 1000" << endl;
+            cout << "4) Database.             \tFee 600" << endl;
+            do {
+                flag = false;
+                cout << "Please choose first subject number to enroll in: ";
+                cin >> subjectchoice;
+                firstchoice = subjectchoice;
+                submit(subjectchoice, edit, 0);
+                if (student[edit].money < 1000) {
+                    cout << "Error! The rest money is less than the total fees of the rest subjects." << endl;
+                    flag = true;
+                    if (subjectchoice == 1 || subjectchoice == 3) {
+                        student[edit].money += 1000;
+                    }
+                    else if (subjectchoice == 2) {
+                        student[edit].money += 400;
+                    }
+                    else if (subjectchoice == 4) {
+                        student[edit].money += 600;
+                    }
+                }
+            } while (flag == true);
+            do {
+                flag = false;
+                cout << "Please choose second subject number to enroll in: ";
+                cin >> subjectchoice;
+                if (subjectchoice == firstchoice) {
+                    cout << "Error! You chose this subject before." << endl;
+                    flag = true;
+                }
+                else {
+                    secondchoice = subjectchoice;
+                    submit(subjectchoice, edit, 1);
+                    if (student[edit].money < 400) {
+                        cout << "Error! The rest money is less than the total fees of the rest subjects." << endl;
+                        flag = true;
+                        if (subjectchoice == 1 || subjectchoice == 3) {
+                            student[edit].money += 1000;
+                        }
+                        else if (subjectchoice == 2) {
+                            student[edit].money += 400;
+                        }
+                        else if (subjectchoice == 4) {
+                            student[edit].money += 600;
+                        }
+                    }
+                }
+            } while (flag == true);
+            do {
+                flag = false;
+                cout << "Please choose third subject number to enroll in: ";
+                cin >> subjectchoice;
+                if (subjectchoice == firstchoice || subjectchoice == secondchoice) {
+                    cout << "Error! You chose this subject before." << endl;
+                    flag = true;
+                }
+                else {
+                    if (subjectchoice == 1 || subjectchoice == 3) {
+                        if (student[edit].money < 1000) {
+                            cout << "Error! The rest money is less than the total fees of this subject." << endl;
+                            flag = true;
+                        }
+                        else {
+                            submit(subjectchoice, edit, 2);
+                        }
+                    }
+                    else if (subjectchoice == 2) {
+                        if (student[edit].money < 400) {
+                            cout << "Error! The rest money is less than the total fees of this subject." << endl;
+                            flag = true;
+                        }
+                        else {
+                            submit(subjectchoice, edit, 2);
+                        }
+                    }
+                    else if (subjectchoice == 4) {
+                        if (student[edit].money < 600) {
+                            cout << "Error! The rest money is less than the total fees of this subject." << endl;
+                            flag = true;
+                        }
+                        else {
+                            submit(subjectchoice, edit, 2);
+                        }
+                    }
+                    else {
+                        cout << "Invalid choice. Please try again." << endl;
+                        flag = true;
+                    }
+                }
+            } while (flag == true);
+            break;
+        case 'N':
+            break;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+            flag = true;
+        }
+    } while (flag == true);
+}
